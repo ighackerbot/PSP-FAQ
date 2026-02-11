@@ -1,0 +1,40 @@
+#BRUTE FORCE SOLUTION
+def removeDuplicates(nums):
+    result = []
+    for i in range(len(nums)):   
+        duplicates=False
+
+        for j in range(i):
+            if nums[i] == nums[j]:
+                duplicates=True 
+                break
+        
+        if not duplicates:
+            result.append(nums[i])
+    
+    for i in range(len(result)):
+        nums[i] = result[i]
+    
+    return len(result)
+
+nums = list(map(int, input().split()))
+print(removeDuplicates(nums))
+
+'''
+Complexity
+Time: O(n²)
+Space: O(n)'''
+
+#OPTIMISE SOLUTION
+def removeDuplicates(nums):
+    if not nums:
+        return 0
+    
+    slow = 0
+    
+    for fast in range(1, len(nums)):
+        if nums[fast] != nums[slow]:
+            slow += 1
+            nums[slow] = nums[fast]
+    
+    return slow + 1
