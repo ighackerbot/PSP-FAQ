@@ -1,0 +1,35 @@
+#Approach 1: Sort the Array
+#Time complexity: O(n log n)
+def findSecondLargest(arr):
+    arr.sort()
+    return arr[-2]
+
+#Approach 2: Sort + Handle Duplicates
+#Time complexity: O(n log n)
+def secondLargest(nums):
+    nums = sorted(set(nums))
+    
+    if len(nums) < 2:
+        return -1   
+    
+    return nums[-2]
+
+#Approach 3: One Pass
+#Time complexity: O(n)
+def secondLargest(nums):
+    if len(nums) <2:
+        return -1
+    largest = float('-inf')
+    second = float('-inf')
+
+    for num in nums:
+        if num > largest:
+            second = largest
+            largest = num
+        elif largest > num > second:
+            second = num    
+    
+    if second == float('-inf'):
+        return -1
+    
+    return second
